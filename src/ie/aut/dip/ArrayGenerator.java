@@ -1,18 +1,37 @@
 package ie.aut.dip;
 
-import java.util.Random;
+/*This class creates the input random integer (0-99) arrays.
+*Based on the provided code.
+*/
 
 public class ArrayGenerator {
-	 private static final Random random = new Random();
 
-	    public static int[] generateRandomArray(int size) {
-	        int[] arr = new int[size];
+	/*
+	 * n: required number of elements
+	 */
 
-	        for (int i = 0; i < size; i++) {
-	            arr[i] = random.nextInt(100000);
-	        }
+	public static int[] randomArray(int n) {
 
-	        return arr;
-	    }
+		int[] array = new int[n];
 
+		for (int i = 0; i < n; i++) {
+			array[i] = (int) (Math.random() * 100);
+		}
+
+		return array;
+	}
+
+	/*
+	 * Creates and returns a copy of the source array. arraycopy: copy every element
+	 * from src into dest. (Object src, int srcIndex, Object dest, int destIndex,
+	 * int len)
+	 */
+
+	public static int[] copyArr(int[] src) {
+		int[] dest = new int[src.length];
+
+		System.arraycopy(src, 0, dest, 0, src.length);
+
+		return dest;
+	}
 }

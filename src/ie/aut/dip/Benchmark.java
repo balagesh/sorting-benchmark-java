@@ -2,24 +2,52 @@ package ie.aut.dip;
 
 public class Benchmark {
 
-    public static double benchmarkBubble(int size, int repetitions) {
-        long totalTime = 0;
+	/*
+	 * Benchmarks Bubble Sort.
+	 * Parameters: size -> input array size reps -> number of repetitions
+	 * Returns: average execution time in milliseconds
+	 */
 
-        for (int i = 0; i < repetitions; i++) {
+	public static double benchmarkBubble(int size, int reps) {
 
-            // same original input for all algorithms
-            int[] original = ArrayGenerator.generateRandomArray(size);
+		double total = 0;
 
-            // bubble gets its own copy
-            int[] arr = original.clone();
+		/*
+		 * The original random array. 
+		 * Every repetition will sort a copy of this same input
+		 */
+		int[] original = ArrayGenerator.randomArray(size);
 
-            long start = System.nanoTime();
-            BubbleSort.sort(arr);
-            long end = System.nanoTime();
+		/*
+		 * Repeat the benchmark 'reps' times.
+		 */
+		for (int i = 0; i < reps; i++) {
 
-            totalTime += (end - start);
-        }
-        // Average time, conversion from nano to millis.
-        return (totalTime / repetitions) / 1_000_000.0;
-    }
+			/*
+			 * Create a fresh copy for this repetition.
+			 */
+			int[] cloned = ArrayGenerator.copyArr(original);
+
+			long startTime = System.nanoTime();
+
+			/*
+			 * Run Bubble Sort.
+			 */
+			BubbleSort.sort(cloned);
+
+			long endTime = System.nanoTime();
+			long timeElapsed = endTime - startTime;
+			double elapsedMillis = timeElapsed / 1000000.0;
+
+			/*
+			 * Add current run time to the total.
+			 */
+			total += elapsedMillis;
+		}
+
+		/*
+		 * Return average execution time.
+		 */
+		return total / reps;
+	}
 }
