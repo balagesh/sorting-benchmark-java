@@ -1,15 +1,12 @@
 package ie.aut.dip;
 
-/*This class creates the input random integer (0-99) arrays.
-*Based on the provided code.
-*/
+/* This class creates the input random integer (0-99) arrays.
+ * Based on the provided code.
+ */
 
 public class ArrayGenerator {
 
-	/*
-	 * n: required number of elements
-	 */
-
+	// n: required number of elements
 	public static int[] randomArray(int n) {
 
 		int[] array = new int[n];
